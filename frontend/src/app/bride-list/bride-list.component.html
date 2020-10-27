@@ -1,0 +1,58 @@
+<h1>MÜŞTERİ KONTROL LİSTESİ</h1>
+<mat-card style="border-radius: 20px; width: 70%; margin: auto; margin-top: 100px;">
+    <mat-form-field style="float: left;">
+        <input matInput (keyup)="applyFilter($event.target.value)">
+        <mat-icon matSuffix>search</mat-icon>
+    </mat-form-field>
+    <a style="float: right;" mat-raised-button color="accent" class="ml-3" [routerLink]="['/add']">
+        <mat-icon>add</mat-icon>
+    </a>
+
+
+    <table style="width:100%;" mat-table [dataSource]="datasource" class="mat-evelation-z8">
+
+        <ng-container matColumnDef="name">
+            <th mat-header-cell *matHeaderCellDef>Ad</th>
+            <td mat-cell *matCellDef="let bride">{{ bride.name }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="surname">
+            <th mat-header-cell *matHeaderCellDef>Soyad</th>
+            <td mat-cell *matCellDef="let bride">{{ bride.surname }}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="weddingDate">
+            <th mat-header-cell *matHeaderCellDef>Düğün/Nişan Tarihi:</th>
+            <td mat-cell *matCellDef="let bride">{{ bride.weddingDate | date: "dd/MM/yyyy"}}</td>
+        </ng-container>
+
+        <ng-container matColumnDef="type">
+            <th mat-header-cell *matHeaderCellDef>Düğün/Nişan Tarihi:</th>
+            <td mat-cell *matCellDef="let bride">{{ bride.type | uppercase}}</td>
+        </ng-container>
+        <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef>İşlemler</th>
+            <td mat-cell *matCellDef="let bride">
+                <a (click)="deleteBride(bride._id)" class="mr-3" mat-raised-button color="warn">
+                    <mat-icon>delete</mat-icon>
+                </a>
+                <a mat-raised-button color="primary" [routerLink]="['/update', bride._id]">
+                    <mat-icon>update</mat-icon>
+                </a>
+                <button mat-raised-button color="primary" class="ml-3" [routerLink]="['/invoice', bride._id]">
+                    <mat-icon>print</mat-icon>
+                </button>
+                <a mat-raised-button color="primary" class="ml-3" [routerLink]="['/details', bride._id]">
+                    <mat-icon>find_in_page</mat-icon>
+                </a>
+                <a (click)="createSms(bride._id)" class="ml-3" mat-raised-button color="primary">
+                    <mat-icon>watch_later</mat-icon>
+                </a>
+            </td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+    <mat-paginator [pageSizeOptions]="[5, 10, 15]" showFirstLastButtons></mat-paginator>
+</mat-card>

@@ -1,0 +1,104 @@
+<div style="margin: auto; width: 50%; margin-top: 60px;" class="form-border">
+    <div class="top-bar"> MÜŞTERİ KAYIT</div>
+    <form class="m-4" (ngSubmit)="onSubmit()">
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="type">TÜR</label>
+                <input type="text" class="form-control" [(ngModel)]="bride.type" name="type">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="name">Ad</label>
+                <input type="text" class="form-control" [(ngModel)]="bride.name" name="name">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="surname">Soyad</label>
+                <input type="text" class="form-control" [(ngModel)]="bride.surname" name="surname">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputAddress">Address</label>
+            <input type="text" class="form-control" [(ngModel)]="bride.adress" name="adress">
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="phone">Telefon</label>
+                <input type="tel" class="form-control" [(ngModel)]="bride.phone" name="phone" value="+90">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="weddingDate">Düğün/Nişan Tarihi</label>
+                <input type="date" class="form-control" [(ngModel)]="bride.weddingDate" name="weddingDate">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="weddingHour">Düğün/Nişan Saati</label>
+                <input type="time" class="form-control" [(ngModel)]="bride.weddingHour" name="weddingHour">
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="weddingTestDate">Prova Tarihi</label>
+                <input type="date" class="form-control" [(ngModel)]="bride.weddingTestDate" name="weddingTestDate">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="weddingTestHour">Prova Saati</label>
+                <input type="time" class="form-control" [(ngModel)]="bride.weddingTestHour" name="weddingTestHour">
+            </div>
+            <div class="form-check form-check-inline col-md-2 ml-4">
+                <input class="form-check-input" type="checkbox" value="sale" [(ngModel)]="bride.sale" name="sale">
+                <label class="form-check-label" for="sale">Satılık</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" value="sale" [(ngModel)]="bride.rent" name="rent">
+                <label class="form-check-label" for="sale">Kiralık</label>
+            </div>
+        </div>
+
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="hennaDate">Kına Tarihi</label>
+                <input type="datetime-local" class="form-control" [(ngModel)]="bride.hennaDate" name="hennaDate">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="hennaHour">Kına Saati</label>
+                <input type="datetime-local" class="form-control" [(ngModel)]="bride.hennaHour" name="hennaHour">
+            </div>
+            <div class="form-check form-check-inline col-md-2 ml-4">
+                <input class="form-check-input" type="checkbox" value="zero" [(ngModel)]="bride.zero" name="zero">
+                <label class="form-check-label" for="zero">Sıfır</label>
+            </div>
+            <div class="form-check form-check-inline">
+                <input class="form-check-input" type="checkbox" value="used" [(ngModel)]="bride.used" name="used">
+                <label class="form-check-label" for="used">2.El</label>
+            </div>
+        </div>
+        <div class="form-row">
+            <div class="form-group col-md-4">
+                <label for="weddingDressGive">Ürün Veriş Tarihi</label>
+                <input type="date" class="form-control" [(ngModel)]="bride.weddingDressGive" name="weddingDressGive">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="weddingDressTake">Ürün Alış Tarihi</label>
+                <input type="date" class="form-control" [(ngModel)]="bride.weddingDressTake" name="weddingDressTake">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="weddingDressCode">Ürün Kodu</label>
+                <input type="text" class="form-control" [(ngModel)]="bride.weddingDressCode" name="weddingDressCode">
+            </div>
+        </div>
+
+        <div class="form-row" ng-controller="testController as testCtrl">
+            <div class="form-group col-md-4">
+                <label for="total">Toplam</label>
+                <input type="number" class="form-control" [(ngModel)]="bride.total" name="total">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="downPayment">Kapora</label>
+                <input type="number" class="form-control" [(ngModel)]="bride.downPayment" name="downPayment">
+            </div>
+            <div class="form-group col-md-4">
+                <label for="remaining">Kalan</label>
+                <input type="number" class="form-control" [(ngModel)]="bride.remaining" name="remaining">
+            </div>
+        </div>
+        <button type="submit" class="btn btn-linear btn-block">KAYDET</button>
+    </form>
+</div>

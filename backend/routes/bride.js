@@ -1,12 +1,18 @@
 var express = require('express');
 var router = express.Router();
+const accountSid = 'ACe20d33412412267cc703041bef5a94fd';
+const authToken = '0ece5cc781678b2116a0d71648d39027';
+const client = require('twilio')(accountSid, authToken);
 
 const Bride = require('../models/Bride');
 
-router.post('/', (req, res, next) => {
 
+router.post('/', (req, res, next) => {
     const bride = new Bride(req.body);
-    const promise = bride.save();
+    const phone = '+905457430302'
+    const promise = bride.save(client.messages
+        .create({ body: 'Hi there!', from: '+14328887467', to: `${phone}` })
+        .then(message => console.log(message.sid)));
 
     promise.then((data) => {
         res.json(data);
@@ -14,6 +20,37 @@ router.post('/', (req, res, next) => {
         res.json(err);
     })
 });
+
+router.post('/:smsid', (req, res, next) => {
+    const promise = Bride.findById(req.params.smsid);
+    const phone = '+905457430302';
+    const merhaba = "lkjhjg";
+    client.messages
+        .create({ body: `${merhaba}`, from: '+14328887467', to: `${phone}` })
+        .then(message => console.log(message.sid));
+
+    promise.then((data) => {
+        res.json(data);
+    }).catch((err) => {
+        res.json(err);
+    })
+});
+
+router.post('/holiday', (req, res, next) => {
+    const promise = Bride.find(req.params.smsid);
+    const phone = '+905457430302';
+    const merhaba = "lkjhjg";
+    client.messages
+        .create({ body: `${merhaba}`, from: '+14328887467', to: `${phone}` })
+        .then(message => console.log(message.sid));
+
+    promise.then((data) => {
+        res.json(data);
+    }).catch((err) => {
+        res.json(err);
+    })
+});
+
 
 router.get('/', (req, res) => {
     const promise = Bride.find({});
@@ -48,6 +85,7 @@ router.get('/:movie_id', (req, res, next) => {
 });
 
 
+
 router.put('/:movie_id', (req, res, next) => {
     const promise = Bride.findByIdAndUpdate(
         req.params.movie_id,
@@ -61,6 +99,7 @@ router.put('/:movie_id', (req, res, next) => {
         res.json(err);
     })
 });
+
 
 router.delete('/:movie_id', (req, res, next) => {
     const promise = Bride.findByIdAndDelete(req.params.movie_id);
@@ -84,6 +123,7 @@ router.get('/between/:start_year/:end_year', (req, res) => {
         res.json(err);
     })
 });
+
 
 
 module.exports = router;

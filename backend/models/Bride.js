@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const brideSchema = new Schema({
+    type: String,
     name: String,
     surname: String,
     phone: String,
@@ -13,6 +14,7 @@ const brideSchema = new Schema({
     weddingTestHour: Date,
     hennaDate: Date,
     hennaHour: Date,
+    weddingDressCode: String,
     sale: Boolean,
     rent: Boolean,
     zero: Boolean,

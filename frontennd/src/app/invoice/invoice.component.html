@@ -1,0 +1,99 @@
+<!-- Print Button -->
+<div class="print-button-container">
+    <button (click)="list()" class="btn btn-success btn-sm btn-block text-center">Müşteri Listesine Geri Dön</button>
+    <a href="javascript:window.print()" class="print-button">YAZDIR</a>
+</div>
+
+<!-- Invoice -->
+<div id="card ">
+
+    <!-- Header -->
+    <div class="row mb-5">
+        <div class="col-xl-6">
+            <img style="width: 30%;" src="../../assets/img/logo.png" alt="">
+        </div>
+
+        <div class="col-xl-6">
+
+            <p id="details">
+                <strong class="date">Tarih:</strong> {{bride.createdAt | date:'dd/MM/yyyy'}} <br> Bu belge düğün günü geçerliliğini yitirir.
+
+            </p>
+
+        </div>
+    </div>
+
+
+    <!-- Client & Supplier -->
+    <div class="row">
+        <div class="col-xl-12"></div>
+
+        <div class="col-sm-3">
+            <h5>Deniz-i Gelinlik</h5>
+            <p>
+                Abdurrahman Gazi Mah. Fatih Bulvarı No:93/B <br> Sultanbeyli/İSTANBUL <br> 0216 419 28 52 – 0532 415 08 52
+            </p>
+        </div>
+
+    </div>
+    <div class="row">
+
+        <div class="col-sm-3" *ngIf="bride">
+            <h5>Müşteri</h5>
+            <p>
+                <strong>Ad, Soyad:</strong> {{bride.name}}, {{bride.surname}} <br> <strong>Numara:</strong> {{bride.phone}} <br> <strong>Adres:</strong> {{bride.adress}} <br>
+            </p>
+        </div>
+
+        <div class="col-sm-3" *ngIf="bride">
+            <h5>Detaylar</h5>
+            <p>
+                <strong>Düğün Günü:</strong> {{bride.weddingDate | date:'dd/MM/yyyy'}}, <br> <strong> Prova Tarihi:</strong> {{bride.weddingTestDate | date:'dd/MM/yyyy'}}, {{bride.weddingTestDate | date:'hh:ss'}} <br> {{bride.sale}} {{bride.rent}} {{bride.zero}}
+                {{bride.used}}
+            </p>
+        </div>
+
+        <div class="col-sm-3" *ngIf="bride">
+            <h5>Ürün</h5>
+            <p>
+                <strong>Gelinlik Veriş Tarihi:</strong> {{bride.weddingDressGive | date:'dd/MM/yyyy'}}, <br> <strong>Gelinlik Alış Tarihi:</strong> {{bride.weddingDressTake | date:'dd/MM/yyyy'}}
+            </p>
+        </div>
+    </div>
+
+
+    <!-- Invoice -->
+    <div class="row">
+        <div class="col-xl-12">
+            <table class="margin-top-20" *ngIf="bride">
+                <tr>
+                    <th>Açıklama</th>
+                    <th>Toplam</th>
+                    <th>Kapora</th>
+                    <th>Kalan</th>
+                </tr>
+
+                <tr>
+                    <td>Standart Plan</td>
+                    <td>{{bride.total}} ₺</td>
+                    <td>{{bride.downPayment}} ₺</td>
+                    <td>{{bride.remaining}} ₺</td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+
+
+    <!-- Footer -->
+    <div class="row">
+        <div class="col-xl-12">
+            <ul id="footer">
+                <li><span>www.denizigelinlik.com</span></li>
+                <li>info@denizigelinlik.com</li>
+                <li>(0216) 419 28 52 – (0532) 415 08 52</li>
+            </ul>
+        </div>
+    </div>
+
+</div>

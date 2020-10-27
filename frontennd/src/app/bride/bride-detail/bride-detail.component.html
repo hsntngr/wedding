@@ -1,0 +1,61 @@
+<button (click)="list()" class="btn btn-success btn-sm btn-block text-center">Müşteri Listesine Geri Dön</button>
+
+
+<div *ngIf="bride">
+    <div class="row">
+        <div class="col-sm-3"> <label><b>Ad: </b></label> {{bride.name}} </div>
+        <div class="col-sm-3"> <label><b>Soyad: </b></label> {{bride.surname}} </div>
+        <div class="col-sm-5"> <label><b>Adres: </b></label> {{bride.adress}} </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-3"> <label><b>Düğün Tarihi: </b></label> {{bride.weddingDate | date:'dd/MM/yyyy'}} </div>
+        <div class="col-sm-3"><label><b>Gelinlik Prova Tarihi: </b></label> {{bride.weddingTestDate | date:'dd/MM/yyyy' }}</div>
+        <div class="col-sm-5"> <label><b>Gelinlik Prova Saati: </b></label> {{bride.weddingTestHour | date:'hh:ss'}}</div>
+    </div>
+    <div class="row">
+        <div class="col-sm-2"> <label><b>Kına Tarihi: </b></label> {{bride.hennaDate | date:'dd/MM/yyyy'}}</div>
+        <div class="col-sm-2"><label><b>Kına Saati: </b></label> {{bride.hennaHour | date:'hh:dd'}}</div>
+        <div class="col-sm-3"><label><b>Gelinlik Alış Tarihi: </b></label> {{bride.weddingDressTake | date:'dd/MM/yyyy'}}</div>
+        <div class="col-sm-3"> <label><b>Gelinlik Veriş Tarihi: </b></label> {{bride.weddingDressGive | date:'dd/MM/yyyy'}}</div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-3"> <label><b>Toplam </b></label> {{bride.total}}</div>
+        <div class="col-sm-3"> <label><b>Kapora: </b></label> {{bride.downPayment}} </div>
+        <div class="col-sm-5"> <label><b>Kalan: </b></label> {{bride.remaining}} </div>
+    </div>
+
+    <div>
+
+        <div>
+            <label><b>Kına Tarihi: </b></label> {{bride.hennaDate | date:'dd/MM/yyyy'}}
+        </div>
+        <div>
+            <label><b>Kına Saati: </b></label> {{bride.hennaHour | date:'hh:dd'}}
+        </div>
+        <div>
+            <label><b>Satılık: </b></label> {{bride.sale}}
+        </div>
+        <div>
+            <label><b>Kiralık: </b></label> {{bride.rent}}
+        </div>
+        <div>
+            <label><b>Sıfır: </b></label> {{bride.zero}}
+        </div>
+        <div>
+            <label><b>Kullanılmış: </b></label> {{bride.used}}
+        </div>
+        <div>
+            <label><b>Gelinlik Alış Tarihi: </b></label> {{bride.weddingDressTake | date:'dd/MM/yyyy'}}
+        </div>
+        <div>
+            <label><b>Gelinlik Veriş Tarihi: </b></label> {{bride.weddingDressGive | date:'dd/MM/yyyy'}}
+        </div>
+
+
+    </div>
+
+
+    <table>
+
+    </table>
