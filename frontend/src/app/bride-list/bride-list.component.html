@@ -7,8 +7,8 @@
   </mat-form-field>
   <mat-form-field>
     <mat-date-range-input [rangePicker]="picker">
-      <input matStartDate (focus)="picker.open()" #startDate>
-      <input matEndDate (focus)="picker.open()" #endDate>
+      <input matStartDate (focus)="picker.open()" #startDate [(ngModel)]="filterDates.begin" [ngModelOptions]="{standalone: true}">
+      <input matEndDate (focus)="picker.open()" #endDate [(ngModel)]="filterDates.begin" [ngModelOptions]="{standalone: true}">
     </mat-date-range-input>
     <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
     <mat-date-range-picker #picker (closed)="onDateFilterChange(startDate, endDate)"></mat-date-range-picker>

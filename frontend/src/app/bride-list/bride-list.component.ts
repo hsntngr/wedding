@@ -35,9 +35,9 @@ export class BrideListComponent implements OnInit {
     weddingDate: {begin: null, end: null}
   };
   filterDates: {
-    begin: Date,
-    end: Date
-  };
+    begin: string,
+    end: string
+  } = {begin: null, end: null};
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
