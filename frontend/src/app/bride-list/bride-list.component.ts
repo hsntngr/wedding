@@ -6,24 +6,24 @@ import {Observable} from 'rxjs';
 import {MatTableDataSource} from '@angular/material/table';
 import {MatPaginator} from '@angular/material/paginator';
 import {DatePipe} from '@angular/common';
+import {SatDatepickerInputEvent} from 'saturn-datepicker';
 
 interface BrideTableFilters {
   brideName: string;
-  weddingDate: string;
+  weddingDate: { begin: Date, end: Date };
 }
 
 @Component({
   selector: 'app-bride-list',
   templateUrl: './bride-list.component.html',
   styleUrls: ['./bride-list.component.css'],
-  providers: [DatePipe]
 })
 export class BrideListComponent implements OnInit {
 
   brides: Observable<Bride[]>;
 
   bride: Bride[];
-  datasource;
+  datasource: MatTableDataSource<Bride>;
   displayedColumns: string[] = [
     'name',
     'surname',
@@ -41,30 +41,29 @@ export class BrideListComponent implements OnInit {
   constructor(
     private brideService: BrideService,
     private router: Router,
-    private datePipe: DatePipe
   ) {
   }
 
 
   ngOnInit(): void {
+    this.datasource = new MatTableDataSource<Bride>([]);
     this.brideService.getBrideList().subscribe(result => {
-      this.bride = result;
-      this.datasource = new MatTableDataSource<Bride>(this.bride);
       this.datasource.paginator = this.paginator;
+      this.datasource.data = this.bride = result;
+      this.datasource.filterPredicate = (data: Bride, filters: any) => {
+        const {brideName, weddingDate} = filters;
+        const dataDateUnix = Date.parse(data.weddingDate);
+        const dateName = data.name.toLocaleLowerCase('tr');
+        const dataSurname = data.surname.toLocaleLowerCase('tr');
+        const dataFullName = dateName + ' ' + dataSurname;
+        const brideNamePass = brideName ? dataFullName.includes(brideName) : true;
+        const weddingDatePass = weddingDate
+          ? (dataDateUnix >= weddingDate.begin.getTime() && dataDateUnix <= weddingDate.end.getTime())
+          : true;
+
+        return brideNamePass && weddingDatePass;
+      };
     });
-
-    this.datasource = new MatTableDataSource<Bride>(this.bride);
-    this.datasource.paginator = this.paginator;
-    this.datasource.filterPredicate = (data: Bride, filters: BrideTableFilters) => {
-      const {brideName, weddingDate} = filters;
-      const dateName = data.name.toLocaleLowerCase('tr');
-      const dataSurname = data.surname.toLocaleLowerCase('tr');
-      const dataFullName = dateName + ' ' + dataSurname;
-      const brideNamePass = brideName ? dataFullName.includes(brideName) : true;
-      const weddingDatePass = weddingDate ? data.weddingDate === weddingDate : true;
-
-      return brideNamePass && weddingDatePass;
-    };
   }
 
 
@@ -74,19 +73,19 @@ export class BrideListComponent implements OnInit {
 
       let index = this.bride.indexOf(category);
       this.bride.splice(index, 1);
-      this.datasource = new MatTableDataSource<Bride>(this.bride);
+      this.datasource.data = this.bride;
     });
   }
 
   createSms(id: number) {
     this.brideService.createSms(id).subscribe(result => {
-      this.datasource = new MatTableDataSource<Bride>(this.bride);
+      this.datasource.data = this.bride;
     });
   }
 
   createSmsHoliday(id: number) {
     this.brideService.createSms(id).subscribe(result => {
-      this.datasource = new MatTableDataSource<Bride>(this.bride);
+      this.datasource.data = this.bride;
     });
   }
 
@@ -104,16 +103,19 @@ export class BrideListComponent implements OnInit {
 
   onBrideNameChange(): void {
     this.datasource.filter = this.getNormalizedFilters();
-    console.log(this.datasource.filter);
   }
 
-  onDateFilterChange(): void {
+  onDateFilterChange($event: SatDatepickerInputEvent<unknown>): void {
+    this.filters.weddingDate = $event.value as any;
     this.datasource.filter = this.getNormalizedFilters();
-    console.log(this.datasource.filter);
   }
 
-  getNormalizedFilters(): BrideTableFilters {
-    const weddingDate = this.filters.weddingDate && this.datePipe.transform(this.filters.weddingDate, 'yyyy-MM-dd');
+  getNormalizedFilters(): any {
+    this.filters.weddingDate.end.setHours(23);
+    this.filters.weddingDate.end.setMinutes(59);
+    this.filters.weddingDate.end.setSeconds(59);
+    this.filters.weddingDate.end.setMilliseconds(999);
+    const weddingDate = this.filters.weddingDate;
     const brideName = this.filters.brideName?.toLocaleLowerCase('tr').trim();
 
     return {weddingDate, brideName};

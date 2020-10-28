@@ -7,10 +7,13 @@
       <mat-icon matSuffix>search</mat-icon>
     </mat-form-field>
     <mat-form-field>
-      <input matInput [(ngModel)]="filters.weddingDate" [ngModelOptions]="{standalone: true}" [matDatepicker]="picker"
-             (dateChange)="onDateFilterChange()" (focus)="picker.open()" >
-      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
+      <input matInput
+             placeholder="Choose a date"
+             (dateChange)="onDateFilterChange($event)"
+             (focus)="picker.open()"
+             [satDatepicker]="picker">
+      <sat-datepicker #picker [rangeMode]="true"></sat-datepicker>
+      <sat-datepicker-toggle matSuffix [for]="picker"></sat-datepicker-toggle>
     </mat-form-field>
   </form>
   <a style="float: right;" mat-raised-button color="accent" class="ml-3" [routerLink]="['/add']">

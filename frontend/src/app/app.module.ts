@@ -15,6 +15,7 @@ import { BrideInvoiceComponent } from './bride-invoice/bride-invoice.component';
 import { BrideDetailComponent } from './bride-detail/bride-detail.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
+import {SatDatepickerModule, SatNativeDateModule} from 'saturn-datepicker';
 
 @NgModule({
   declarations: [
@@ -33,8 +34,9 @@ import {MatNativeDateModule} from '@angular/material/core';
     FormsModule,
     HttpClientModule,
     SharedModule,
-    MatNativeDateModule,
+    SatNativeDateModule,
     MatDatepickerModule,
+    SatDatepickerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
