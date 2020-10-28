@@ -13,6 +13,8 @@ import { BrideEditComponent } from './bride-edit/bride-edit.component';
 import { BrideListComponent } from './bride-list/bride-list.component';
 import { BrideInvoiceComponent } from './bride-invoice/bride-invoice.component';
 import { BrideDetailComponent } from './bride-detail/bride-detail.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,7 @@ import { BrideDetailComponent } from './bride-detail/bride-detail.component';
     BrideListComponent,
     BrideInvoiceComponent,
     BrideDetailComponent,
-    
+
   ],
   imports: [
     BrowserModule,
@@ -31,6 +33,8 @@ import { BrideDetailComponent } from './bride-detail/bride-detail.component';
     FormsModule,
     HttpClientModule,
     SharedModule,
+    MatNativeDateModule,
+    MatDatepickerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
