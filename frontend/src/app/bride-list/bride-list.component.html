@@ -1,21 +1,19 @@
 <h1>MÜŞTERİ KONTROL LİSTESİ</h1>
 <mat-card style="border-radius: 20px; width: 70%; margin: auto; margin-top: 100px;">
-  <form>
-    <mat-form-field style="float: left; margin-right: 10px">
-      <input [(ngModel)]="filters.brideName" [ngModelOptions]="{standalone: true}" matInput
-             (keyup)="onBrideNameChange()">
-      <mat-icon matSuffix>search</mat-icon>
-    </mat-form-field>
-    <mat-form-field>
-      <input matInput
-             placeholder="Choose a date"
-             (dateChange)="onDateFilterChange($event)"
-             (focus)="picker.open()"
-             [satDatepicker]="picker">
-      <sat-datepicker #picker [rangeMode]="true"></sat-datepicker>
-      <sat-datepicker-toggle matSuffix [for]="picker"></sat-datepicker-toggle>
-    </mat-form-field>
-  </form>
+  <mat-form-field style="float: left; margin-right: 10px">
+    <input [(ngModel)]="filters.brideName" [ngModelOptions]="{standalone: true}" matInput
+           (keyup)="onBrideNameChange()">
+    <mat-icon matSuffix>search</mat-icon>
+  </mat-form-field>
+  <mat-form-field>
+    <mat-date-range-input [rangePicker]="picker">
+      <input matStartDate (focus)="picker.open()" #startDate>
+      <input matEndDate (focus)="picker.open()" #endDate>
+    </mat-date-range-input>
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-date-range-picker #picker (closed)="onDateFilterChange(startDate, endDate)"></mat-date-range-picker>
+  </mat-form-field>
+
   <a style="float: right;" mat-raised-button color="accent" class="ml-3" [routerLink]="['/add']">
     <mat-icon>add</mat-icon>
   </a>

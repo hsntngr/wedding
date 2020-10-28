@@ -6,7 +6,7 @@ import { HttpClientModule  } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SharedModule } from '../app/shared/shared.module'
+import { SharedModule } from '../app/shared/shared.module';
 
 import { BrideAddComponent } from './bride-add/bride-add.component';
 import { BrideEditComponent } from './bride-edit/bride-edit.component';
@@ -14,8 +14,7 @@ import { BrideListComponent } from './bride-list/bride-list.component';
 import { BrideInvoiceComponent } from './bride-invoice/bride-invoice.component';
 import { BrideDetailComponent } from './bride-detail/bride-detail.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material/core';
-import {SatDatepickerModule, SatNativeDateModule} from 'saturn-datepicker';
+import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -34,11 +33,12 @@ import {SatDatepickerModule, SatNativeDateModule} from 'saturn-datepicker';
     FormsModule,
     HttpClientModule,
     SharedModule,
-    SatNativeDateModule,
+    MatNativeDateModule,
     MatDatepickerModule,
-    SatDatepickerModule
   ],
-  providers: [],
+  providers: [
+    { provide: MAT_DATE_LOCALE, useValue: 'en-GB' }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
