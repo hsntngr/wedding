@@ -59,9 +59,9 @@ export class BrideListComponent implements OnInit {
       const dataFullName = dateName + ' ' + dataSurname;
 
       const brideNamePass = brideName ? dataFullName.includes(brideName) : true;
-      const weddingDatePass = (weddingDate.begin && weddingDate.end && dataDateUnix)
+      const weddingDatePass = dataDateUnix ? ((weddingDate.begin && weddingDate.end)
         ? (dataDateUnix >= weddingDate.begin.getTime() && dataDateUnix <= weddingDate.end.getTime())
-        : true;
+        : true) : false;
 
       return brideNamePass && weddingDatePass;
     };
