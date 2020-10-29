@@ -38,6 +38,7 @@ export class BrideListComponent implements OnInit {
     begin: string,
     end: string
   } = {begin: null, end: null};
+  WEDDING_DATE_NOT_REGISTERED = 0;
 
   @ViewChild(MatPaginator, {static: true}) paginator: MatPaginator;
 
@@ -51,12 +52,14 @@ export class BrideListComponent implements OnInit {
     this.datasource = new MatTableDataSource<Bride>([]);
     this.datasource.filterPredicate = (data: Bride, filters: any) => {
       const {brideName, weddingDate} = filters;
-      const dataDateUnix = Date.parse(data.weddingDate);
-      const dateName = data.name.toLocaleLowerCase('tr');
-      const dataSurname = data.surname.toLocaleLowerCase('tr');
+
+      const dataDateUnix = data.weddingDate ? Date.parse(data.weddingDate) : this.WEDDING_DATE_NOT_REGISTERED;
+      const dateName = data.name?.toLocaleLowerCase('tr');
+      const dataSurname = data.surname?.toLocaleLowerCase('tr');
       const dataFullName = dateName + ' ' + dataSurname;
+
       const brideNamePass = brideName ? dataFullName.includes(brideName) : true;
-      const weddingDatePass = weddingDate
+      const weddingDatePass = (weddingDate.begin && weddingDate.end && dataDateUnix)
         ? (dataDateUnix >= weddingDate.begin.getTime() && dataDateUnix <= weddingDate.end.getTime())
         : true;
 
